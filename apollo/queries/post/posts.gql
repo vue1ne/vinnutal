@@ -1,0 +1,21 @@
+query posts {  
+  posts {
+     hitisundlaug
+     hitikaldurpottur
+     hitiheiturpottur
+     malingsundlaug
+     malingkaldurpottur
+     malingheiturpottur
+     testsundlaug
+     testkaldurpottur
+     testheiturpottur
+     utkomasundlaug
+     utkomakaldurpottur
+     utkomaheiturpottur
+     minnismidi
+     klormagn
+     tokamotiklor
+     threifklornema
+     mynd
+  }
+}
