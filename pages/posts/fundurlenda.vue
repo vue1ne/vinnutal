@@ -17,7 +17,9 @@
             <div class="uk-width-expand">
                 <h3 class="uk-card-title uk-margin-remove-bottom">{{ post.atridi }}</h3>
                 <p class="uk-text-meta uk-margin-remove-top">
-                <time><span class="date">{{ post.created_at | moment('timezone', 'Atlantic/Reykjavik', 'ddd ll') }}</span>
+                <time>
+                <span class="date">{{ post.created_at | moment('timezone', 'Atlantic/Reykjavik', 'ddd ll') }}</span>
+                                  <span class="timi" uk-icon="icon: clock"></span><span class="time">{{ post.created_at | moment("H:mm") }}</span>
                 </time></p>
 
             </div>
@@ -53,7 +55,9 @@
 
           <span class="uk-align-right">
                 <span class="uk-text-warning">
-                  <time><span class="date">{{ post.created_at | moment('timezone', 'Atlantic/Reykjavik', 'ddd ll') }}</span></time>
+                  <time>
+                  <span class="date">{{ post.nasti | moment('timezone', 'Atlantic/Reykjavik', 'ddd ll') }}</span></time>
+                  <span class="timi" uk-icon="icon: clock"></span><span class="time">{{ post.nasti | moment("H:mm") }}</span>
                 </span>
           </span><!-- .uk-align-right -->
                             

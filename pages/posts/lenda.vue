@@ -60,7 +60,9 @@
                 <h3 class="uk-card-title uk-margin-remove-bottom" v-else-if="post.vakt == 'varmahlid'">Varmahlíð</h3>
 
                 <p class="uk-text-meta uk-margin-remove-top">
-                <time><span class="date">{{ post.created_at | moment('timezone', 'Atlantic/Reykjavik', 'ddd ll') }}</span>
+                <time>
+                <span class="date">{{ post.dagsetning | moment('timezone', 'Atlantic/Reykjavik', 'ddd ll') }}</span>
+                                  <span class="timi" uk-icon="icon: clock"></span><span class="time">{{ post.dagsetning | moment("H:mm") }}</span>
                 </time></p>
             </div>
 
@@ -124,15 +126,35 @@
                             
         </div><!-- .slide-right -->
 
-        <div class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">
-              
-          <span>Samtals</span>
+        <span>Samtals:</span>
 
-          <span class="uk-align-right">
-          <input :value="yfirvinna+helgarvinna" class="uk-input uk-form-width-small">  
+        <div v-if="post.vakt == 'fyrrivakt'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
+        <span>Fyrri Vakt</span>
+        <span class="uk-align-right">
+        <span class="uk-text-success">{{ fyrrivakt }}</span>
+        </span><!-- .uk-align-right -->
+        </div><!-- .slide-right -->
 
-          <span class="uk-text-success">{{ result }}</span>
-          </span><!-- .uk-align-right -->
+        <div v-if="post.vakt == 'seinnivakt'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
+        <span>Seinni Vakt</span>
+        <span class="uk-align-right">
+        <span class="uk-text-success">{{ seinni }}</span>
+        </span><!-- .uk-align-right -->
+        </div><!-- .slide-right -->
+
+        <div v-if="post.vakt == 'helgarvakt'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
+        <span>Helgarvakt</span>
+        <span class="uk-align-right">
+        <span class="uk-text-success">{{ helgi }}</span>
+        <input :value="yfirvinna+trjatiu*helgarvinna" class="uk-input uk-form-width-small">
+        </span><!-- .uk-align-right -->
+        </div><!-- .slide-right -->
+
+        <div v-if="post.vakt == 'varmalhlid'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
+        <span>Varmahlíð</span>
+        <span class="uk-align-right">
+        <span class="uk-text-success">{{ helgi }}</span>
+        </span><!-- .uk-align-right -->
                             
         </div><!-- .slide-right -->
         
@@ -191,23 +213,29 @@ export default {
       return this.$store.getters['auth/avatar']
     },
     //total calculation
-    total: function() {
-      let calculatedTotal = this.yfirvinna + this.helgarvinna;
+    fyrrivakt: function() {
+      let calculatedTotal = this.trjatiu + this.yfirvinna;
       this.alls_total = calculatedTotal
       return calculatedTotal;
     },
-    total: function() {
+    seinnivakt: function() {
       let calculatedTotal = this.malingkaldurpottur - this.testkaldurpottur;
       this.samtals_total = calculatedTotal
       return calculatedTotal;
     },
-    total: function() {
-      let calculatedTotal = this.malingheiturpottur - this.testheiturpottur;
-      this.utkomaheiturpottur_total = calculatedTotal
+    helgarvakt: function() {
+      let calculatedTotal = this.yfirvinna + this.trjatiu * this.helgarvinna;
+      this.samtals_total = calculatedTotal
       return calculatedTotal;
     },
-    result() {
-      return parseInt(this.yfirvinna) + parseInt(this.helgarvinna) * parseInt(this.alls_total);
+    helgi() {
+      return this.yfirvinna + this.trjatiu * 6.45;
+    },
+    fyrri() {
+      return parseInt(this.yfirvinna) + parseInt(this.trjatiu);
+    },
+    seinni() {
+      return parseInt(this.yfirvinna) + parseInt(this.trjatiu);
     }
   },
   
@@ -215,8 +243,11 @@ export default {
     return {
       // Initialize an empty restaurants variabkle
       posts: [],
-      yfirvinna: 3676,
-      helgarvinna: 4873,
+      yfirvinna:3676,
+      helgarvinna: 0,
+      trjatiu: 725,
+      fimtiu: 1197
+
 
     }
   },
