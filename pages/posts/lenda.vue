@@ -2,10 +2,10 @@
 
 <div class="lenda">
 
-<div class="uk-card uk-card-default uk-width-1-1@m" v-for="post in posts">
-        
+<div class="uk-card uk-card-default" v-for="post in posts">
+
         <div class="uk-card-header">
-        <div class="uk-grid-large uk-flex-middle" uk-grid>
+        <div>
 
           <article class="uk-comment">
           <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
@@ -15,8 +15,7 @@
               <div class="uk-width-expand">
                   <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><span class="user" uk-icon="icon: user"></span>{{ username }}</a></h4>
                   <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                      <li><a href="#" :src="starf"></a></li>
-                      <li><a href="#"><span class="user" uk-icon="icon: location"></span>Sundlaug Sauðárkróks</a></li>
+                      <li><a href="#"><span class="user" uk-icon="icon: location"></span>Vinnutal</a></li>
                   </ul>
               </div>
           </header>
@@ -24,20 +23,14 @@
           <div class="uk-comment-body">
             <!-- <p>Velkominn <span>{{ username }} <br><br> -->
 
-             <nuxt-link to="/posts"><button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">
-             <span uk-icon="icon: plus"></span><span class="ny">Nýtt</span> Tímatal
-             </button></nuxt-link>
+
              <nuxt-link to="/posts/optionsfundur"><button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">
              <span uk-icon="icon: plus"></span><span class="ny">Nýtt</span> Fundaratriði
              </button></nuxt-link>
-             <nuxt-link to="/posts/vinnutal"><button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"><span>Tíma</span>tal</button></nuxt-link>
              <nuxt-link to="/posts/fundartal"><button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"><span>Fundar</span>atriði</button></nuxt-link>
               </span></p>
           </div>
           </article>
-         <caption class="date">
-           
-         </caption>
 
         </div>
     </div>
@@ -75,6 +68,16 @@
     <div class="uk-child-width-1-2@l uk-child-width-1-2@m uk-child-width-1-2@s uk-grid-match uk-grid-item-match" uk-grid>
 
     <div>
+
+       <div class="" k-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: span; delay: 300; repeat: true">
+              
+              <span>Dagvinna</span>
+
+              <span class="uk-align-right">
+                <span class="uk-text-danger">{{ post.dagvinna }}</span>
+              </span><!-- .uk-align-right -->
+                            
+        </div><!-- .slide-right -->
 
         <div class="" k-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: span; delay: 300; repeat: true">
               
@@ -143,17 +146,23 @@
         </div><!-- .slide-right -->
 
         <div v-if="post.vakt == 'helgarvakt'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
-        <span>Helgarvakt</span>
+        <span>Tímakaup</span>
         <span class="uk-align-right">
         <span class="uk-text-success">{{ helgi }}</span>
-        <input :value="yfirvinna+trjatiu*helgarvinna" class="uk-input uk-form-width-small">
+        </span><!-- .uk-align-right -->
+        </div><!-- .slide-right -->
+
+        <div v-if="post.vakt == 'helgarvakt'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
+        <span>Helgarvakt</span>
+        <span class="uk-align-right">
+        <span class="uk-text-success">{{ helgisamtals }}</span>
         </span><!-- .uk-align-right -->
         </div><!-- .slide-right -->
 
         <div v-if="post.vakt == 'varmalhlid'" class="" k-grid uk-scrollspy="cls: uk-animation-fade; target: span; delay: 500; repeat: true">              
         <span>Varmahlíð</span>
         <span class="uk-align-right">
-        <span class="uk-text-success">{{ helgi }}</span>
+        <span class="uk-text-success">{{ varmahlid }}</span>
         </span><!-- .uk-align-right -->
                             
         </div><!-- .slide-right -->
@@ -186,7 +195,7 @@
 
 <fundurlenda />
 
-</div>
+</div><!-- .uk-card .uk-card-default -->
 
 </div><!-- .lenda -->
 
@@ -229,12 +238,18 @@ export default {
       return calculatedTotal;
     },
     helgi() {
-      return this.yfirvinna + this.trjatiu * 6.45;
+      return this.dagvinna + this.fimtiu;
+    },
+    helgisamtals() {
+      return this.dagfimtiu * 7;
     },
     fyrri() {
       return parseInt(this.yfirvinna) + parseInt(this.trjatiu);
     },
     seinni() {
+      return parseInt(this.yfirvinna) + parseInt(this.trjatiu);
+    },
+    varmahlid() {
       return parseInt(this.yfirvinna) + parseInt(this.trjatiu);
     }
   },
@@ -243,6 +258,11 @@ export default {
     return {
       // Initialize an empty restaurants variabkle
       posts: [],
+      // reiknað saman
+      dagfimtiu: 3035,  
+
+      // actual laun
+      dagvinna: 1838,
       yfirvinna:3676,
       helgarvinna: 0,
       trjatiu: 725,
@@ -253,8 +273,8 @@ export default {
   },
   // wp reminders import
    async created() {
-    axios.get(`http://localhost:1337/vinnutals?_limit=1&_sort=dagsetning:desc`)
-    //axios.get(`https://sundlaug.herokuapp.com/klormalingars?_limit=1&_sort=created_at:desc`)
+    //axios.get(`http://localhost:1337/vinnutals?_limit=1&_sort=dagsetning:desc`)
+    axios.get(`https://vinnutal.herokuapp.com/fundatals?_limit=1&_sort=created_at:desc`)
     .then(response => {
     this.posts = response.data
     })

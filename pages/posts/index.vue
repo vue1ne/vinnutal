@@ -80,21 +80,21 @@
         <div class="uk-grid-collapse uk-child-width-1-3 uk-text-center" uk-grid>
         <div class="hiti">
             <p><small class="laug"><span>Útkoma:</span> Laug</small> <br>
-            <input :value="testsundlaug-malingsundlaug" class="sundlaug uk-input uk-form-width-small"> 
+            <input :value="malingsundlaug-testsundlaug" class="sundlaug uk-input uk-form-width-small"> 
             <p>Sundlaug <br>
             <input class="uk-input uk-form-width-small" type="text" placeholder="+ / -" v-model="utkomasundlaug"></p>
         </div>
 
         <div class="hiti">
             <p><small class="kaldur"><span>Útkoma:</span> Kaldur</small> <br>
-            <input :value="testkaldurpottur-malingkaldurpottur" class="kaldur uk-input uk-form-width-small">
+            <input :value="malingkaldurpottur-testkaldurpottur" class="kaldur uk-input uk-form-width-small">
             <p>Kaldur Pottur <br>            
             <input class="uk-input uk-form-width-small" type="text" placeholder="+ / -" v-model="utkomakaldurpottur"></p>
         </div>
 
         <div class="hiti">
             <p><small class="heitur"><span>Útkoma:</span> Heitur</small> <br>
-            <input :value="testheiturpottur-malingheiturpottur" placeholder="+ / -" class="heitur uk-input uk-form-width-small">
+            <input :value="malingheiturpottur-testheiturpottur" placeholder="+ / -" class="heitur uk-input uk-form-width-small">
             <p>Heitur pottur <br>
             <input class="uk-input uk-form-width-small" type="text" placeholder="+ / -" v-model="utkomaheiturpottur"></p>
         </div>
@@ -252,8 +252,8 @@ data () {
             async formSubmit(e) {
                 e.preventDefault();
                 let currentObj = this;
-                //axios.post('http://localhost:1337/klormalingars', {
-                axios.post('https://sundlaug.herokuapp.com/klormalingars', {
+                axios.post('http://localhost:1337/klormalingars', {
+                //axios.post('https://sundlaug.herokuapp.com/klormalingars', {
                     hitisundlaug: this.hitisundlaug,
                     hitikaldurpottur: this.hitikaldurpottur,
                     hitiheiturpottur: this.hitiheiturpottur,

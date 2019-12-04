@@ -10,7 +10,7 @@
 
 <div class="uk-navbar-left">
 
-<a class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-reveal">
+<a class="uk-button uk-button-default uk-margin-small-right" uk-toggle="target: #offcanvas-reveal">
   <span uk-icon="icon: menu"></span>
 </a>
 
@@ -25,7 +25,7 @@
 
           <!-- // If you are not logged in -->
           <ul class="uk-navbar-nav" v-else>
-              <!-- <li><a href="/users/register"><span uk-icon="icon: push"></span>Nýskrá</a></li> -->
+              <li><a href="/users/register"><span uk-icon="icon: push"></span>Nýskrá</a></li>
               <li><a href="/users/signin"><span uk-icon="icon: sign-in"></span>Innskrá</a></li>
           </ul>
 </div><!-- .uk-navbar-right -->
@@ -47,8 +47,7 @@
         <div class="uk-width-expand">
             <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><span class="user" uk-icon="icon: user"></span>{{ username }}</a></h4>
             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                <li><a href="#">{{ starf }}</a></li>
-                <li><a href="#"><span class="user" uk-icon="icon: location"></span>Sundlaug Sauðárkróks</a></li>
+                <li><a href="#"><span class="user" uk-icon="icon: location"></span>Vaktartal</a></li>
             </ul>
         </div>
     </header>
@@ -63,7 +62,8 @@
         <dl class="uk-description-list">
         <dt><router-link tag="a" class="navbar-brand" to="/posts/lenda" exact><span uk-icon="icon: home"></span><span>He</span>im</router-link></dt>
         <dt><router-link tag="a" class="navbar-brand" to="/posts" exact><span uk-icon="icon: plus"></span><span class="ny">Ný</span> Mæling</router-link></dt>
-        <dt><router-link tag="a" class="navbar-brand" to="/posts/klor" exact><span>Mæl</span>ingar</router-link></dt>
+        <dt><router-link tag="a" class="navbar-brand" to="/posts/vinnutal" exact><span>Vinnu</span>tal</router-link></dt>
+        <dt><router-link tag="a" class="navbar-brand" to="/posts/fundartal" exact><span>Fundar</span>tal</router-link></dt>
         </dl>
 
     </div>

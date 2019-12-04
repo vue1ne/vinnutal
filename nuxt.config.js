@@ -1,6 +1,9 @@
 
 export default {
   mode: 'universal',
+  //   router: {
+  //   base: '/vinnutal/'
+  // },
   /*
   ** Headers of the page
   */
